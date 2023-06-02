@@ -1,6 +1,4 @@
-# Project #10 - Argent Bank API
-
-This codebase contains the code needed to run the backend for Argent Bank.
+# Project #13 - Argent Bank
 
 ## Getting Started
 
@@ -8,65 +6,79 @@ This codebase contains the code needed to run the backend for Argent Bank.
 
 Argent Bank uses the following tech stack:
 
-- [Node.js v12](https://nodejs.org/en/)
-- [MongoDB Community Server](https://www.mongodb.com/try/download/community)
+- [Node.js v18](https://nodejs.org/en/)
+- [MongoDB Community Server](https://www.mongodb.com/try/download/community) for backend
 
 Please make sure you have the right versions and download both packages. You can verify this by using the following commands in your terminal:
 
-```bash
-# Check Node.js version
-node --version
+#### optional
 
-# Check Mongo version
-mongo --version
-```
+ - docker
 
 ### Instructions
 
-1. Fork this repo
-1. Clone the repo onto your computer
-1. Open a terminal window in the cloned project
-1. Run the following commands:
+#### without docker
+
+in backend folder
 
 ```bash
 # Install dependencies
-npm install
+npm i nodemon bcrypt && npm i
 
-# Start local dev server
+# Start backend server
 npm run dev:server
 
 # Populate database with two users
 npm run populate-db
 ```
 
-Your server should now be running at http://locahost:3001 and you will now have two users in your MongoDB database!
+in frontend folder
 
-## Populated Database Data
+change DATABASE_URL in .env file
 
-Once you run the `populate-db` script, you should have two users in your database:
+```bash
+DATABASE_URL="mongodb://127.0.0.1/argentBankDB"
+```
+or 
+```bash
+DATABASE_URL="mongodb://localhost/argentBankDB"
+```
 
-### Tony Stark
 
-- First Name: `Tony`
-- Last Name: `Stark`
-- Email: `tony@stark.com`
-- Password: `password123`
+```bash
+# Install dependencies
+npm install
 
-### Steve Rogers
+# Start frontend server
+npm run dev
+```
 
-- First Name: `Steve`,
-- Last Name: `Rogers`,
-- Email: `steve@rogers.com`,
-- Password: `password456`
+#### with docker
 
-## API Documentation
+change DATABASE_URL in .env file
+```bash
+DATABASE_URL="mongodb://mongo/argentBankDB"
+```
 
-To learn more about how the API works, once you have started your local environment, you can visit: http://localhost:3001/api-docs
+```bash
+# create docker container
+docker-compose build
 
-## Design Assets
+# Start docker container
+docker-compose up -d
 
-Static HTML and CSS has been created for most of the site and is located in: `/designs`.
+# Populate database with two users
+## enter in container
+docker exec -it backend sh
 
-For some of the dynamic features, like toggling user editing, there is a mock-up for it in `/designs/wireframes/edit-user-name.png`.
+##in container
+npm run populate-db
+```
 
-And for the API model that you will be proposing for transactitons, the wireframe can be found in `/designs/wireframes/transactions.png`.
+### URls
+
+#### Frontend
+http://localhost:8000/
+
+#### Backend
+http://localhost:3001/
