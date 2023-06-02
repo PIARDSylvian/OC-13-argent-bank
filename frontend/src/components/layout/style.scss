@@ -1,4 +1,3 @@
-@import 'reset-css/sass/reset';
 $fa-font-path: 'font-awesome/fonts';
 @import 'font-awesome/scss/font-awesome';
 
@@ -10,6 +9,10 @@ html {
   color: #2c3e50;
 }
 
+body {
+  margin: 0;
+}
+
 #root {
   margin: 0;
   display: flex;
@@ -17,7 +20,7 @@ html {
   min-height: 100vh;
 }
 
-.main {
+main {
   flex: 1;
 }
 
