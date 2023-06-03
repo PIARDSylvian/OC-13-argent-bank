@@ -41,24 +41,15 @@ export default function Home() {
       </div>
       <section className={style.features}>
         <h2 className="sr-only">Features</h2>
-        <Feature
-          image={features[0].image}
-          alt={features[0].alt}
-          title={features[0].title}
-          text={features[0].text}
-        />
-        <Feature
-          image={features[1].image}
-          alt={features[1].alt}
-          title={features[1].title}
-          text={features[1].text}
-        />
-        <Feature
-          image={features[2].image}
-          alt={features[2].alt}
-          title={features[2].title}
-          text={features[2].text}
-        />
+        {features.map((feature, idx) => (
+          <Feature
+            key={`feature-${idx}`}
+            image={feature.image}
+            alt={feature.alt}
+            title={feature.title}
+            text={feature.text}
+          />
+        ))}
       </section>
     </>
   )
