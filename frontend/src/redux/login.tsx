@@ -57,8 +57,8 @@ const { actions, reducer } = createSlice({
     },
   },
 })
-
-export async function login(dispatch, getState) {
+type functionType = (args?: object) => void
+export async function login(dispatch: functionType, getState: functionType) {
   const state = selectLogin(getState())
   if (state.status === 'pending') {
     return
