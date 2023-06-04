@@ -4,9 +4,6 @@ import iconChat from '../../assets/icon-chat.png'
 import iconMoney from '../../assets/icon-money.png'
 import iconSecurity from '../../assets/icon-security.png'
 
-import { useSelector } from 'react-redux'
-import { selectToken } from '../../redux/selector'
-
 const features = [
   {
     image: iconChat,
@@ -29,10 +26,6 @@ const features = [
 ]
 
 export default function Home() {
-  const token = useSelector(selectToken)
-  console.log(token)
-  console.log('ici')
-
   return (
     <>
       <div className={style.hero}>
