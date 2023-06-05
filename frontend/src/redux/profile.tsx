@@ -36,6 +36,12 @@ const { actions, reducer } = createSlice({
       }
       return
     },
+    logout: (draft) => {
+      draft.status = initialState.status
+      draft.error = initialState.error
+      draft.info = initialState.info
+      return
+    },
   },
 })
 type functionType = (args?: object) => void

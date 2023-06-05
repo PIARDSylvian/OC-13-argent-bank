@@ -16,6 +16,10 @@ const customMiddleware = (store) => (next) => (action) => {
         },
       })
     }
+    if (action.type === 'login/logout') {
+      next({ type: 'profile/logout' })
+      return next({ ...action })
+    }
     return next(action)
   }
 }
