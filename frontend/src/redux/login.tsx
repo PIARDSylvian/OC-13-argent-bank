@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { selectLogin } from './selector'
-import utilsFetch from '../utils/useFetch'
+import utilsFetch from '../utils/utilsFetch'
 
 const initialState = {
   status: 'void',
@@ -66,7 +66,7 @@ export async function login(dispatch: functionType, getState: functionType) {
   dispatch(actions.fetching())
   try {
     const data = await utilsFetch(
-      'http://localhost:3001/api/v1/user/login/',
+      'http://localhost:3001/api/v1/user/login',
       'POST',
       { email: state.email, password: state.password }
     )
