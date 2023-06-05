@@ -4,6 +4,7 @@ import Home from '../../pages/Home'
 import Login from '../../pages/Login'
 import Logout from '../../pages/Logout'
 import Profile from '../../pages/Profile'
+import Error from '../../pages/404'
 
 const router = createBrowserRouter([
   {
@@ -28,7 +29,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/404',
-        // element: <Error />,
+        element: <Error />,
       },
     ],
   },

@@ -15,5 +15,19 @@ export default function Logout() {
     document.title = 'Logout - ArgentBank'
   }, [dispatch, user])
 
-  return <section className={style['sign-in-content']}>logout</section>
+  return (
+    <section className={style['sign-out-content']}>
+      <h1 className="sr-only">logout</h1>
+      {user.status === 'void' ? (
+        <>
+          <p>sucesfull logout</p>
+        </>
+      ) : (
+        <>
+          <i className="fa fa-spinner fa-pulse fa-fw"></i>
+          <span className="sr-only">Loading...</span>
+        </>
+      )}
+    </section>
+  )
 }
