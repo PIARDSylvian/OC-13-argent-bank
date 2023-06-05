@@ -3,6 +3,7 @@ import Feature from '../../components/Feature'
 import iconChat from '../../assets/icon-chat.png'
 import iconMoney from '../../assets/icon-money.png'
 import iconSecurity from '../../assets/icon-security.png'
+import { useEffect } from 'react'
 
 const features = [
   {
@@ -26,6 +27,9 @@ const features = [
 ]
 
 export default function Home() {
+  useEffect(() => {
+    document.title = 'Home - ArgentBank'
+  }, [])
   return (
     <>
       <div className={style.hero}>

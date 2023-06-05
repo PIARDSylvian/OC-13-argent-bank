@@ -23,6 +23,7 @@ export default function Profile() {
     } else {
       dispatch(profile(token))
     }
+    document.title = 'Profile - ArgentBank'
   }, [navigate, dispatch, token])
 
   const handleClick = () => {

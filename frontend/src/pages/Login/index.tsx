@@ -27,6 +27,7 @@ export default function Login() {
     if (user.status === 'resolved') {
       navigate('/profile')
     }
+    document.title = 'Login - ArgentBank'
   }, [navigate, user])
 
   const handleChange = (e: FormEvent) => {
