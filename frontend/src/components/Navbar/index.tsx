@@ -13,9 +13,7 @@ export default function Navbar() {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    if (!token) {
-      navigate('/login')
-    } else {
+    if (token) {
       dispatch(profile(token))
     }
   }, [navigate, dispatch])

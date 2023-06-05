@@ -12,6 +12,7 @@ export default function Logout() {
     if (user.status === 'resolved') {
       dispatch(logout())
     }
+    document.title = 'Logout - ArgentBank'
   }, [dispatch, user])
 
   return <section className={style['sign-in-content']}>logout</section>
