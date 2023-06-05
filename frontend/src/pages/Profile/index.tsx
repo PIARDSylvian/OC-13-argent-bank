@@ -1,16 +1,21 @@
 import style from './style.module.scss'
-import { useEffect } from 'react'
+import { useEffect, FormEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { selectToken, selectProfile } from '../../redux/selector'
 import { useSelector, useDispatch } from 'react-redux'
-import { profile } from '../../redux/profile'
+import {
+  profile,
+  setUserInfo,
+  cancelUpdate,
+  updateUserInfo,
+  switchUpdate,
+} from '../../redux/profile'
 
 export default function Profile() {
   const token = useSelector(selectToken)
   const user = useSelector(selectProfile)
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  let edit = true
 
   useEffect(() => {
     if (!token) {
@@ -20,25 +25,49 @@ export default function Profile() {
     }
   }, [navigate, dispatch, token])
 
+  const handleClick = () => {
+    dispatch(switchUpdate())
+  }
+
+  const handleChange = (e: FormEvent) => {
+    const target = e.target as HTMLInputElement
+    dispatch(
+      setUserInfo({
+        [target.id]: target.value,
+      })
+    )
+  }
+
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault()
+    dispatch(updateUserInfo(token))
+  }
+
+  const handleCancel = (e: FormEvent) => {
+    e.preventDefault()
+    dispatch(cancelUpdate())
+    handleClick()
+  }
+
   return (
     <>
       <div className={style.header}>
-        {edit ? (
+        {user.updateOpen ? (
           <>
             <h1>Welcome back</h1>
             <form className={style.form}>
               <div>
                 <input
                   type="text"
-                  // id={Object.keys(INITIAL_STATE)[0]}
-                  // onChange={handleChange}
+                  id="firstName"
+                  onChange={handleChange}
                   disabled={user.status === 'pending'}
                   placeholder={user.info.firstName}
                 />
                 <input
                   type="text"
-                  // id={Object.keys(INITIAL_STATE)[0]}
-                  // onChange={handleChange}
+                  onChange={handleChange}
+                  id="lastName"
                   disabled={user.status === 'pending'}
                   placeholder={user.info.lastName}
                 />
@@ -47,14 +76,14 @@ export default function Profile() {
                 <button
                   type="submit"
                   className={`${style['update-button']} ${style.button}`}
-                  // onClick={handleSubmit}
+                  onClick={handleSubmit}
                 >
                   Save
                 </button>
                 <button
                   type="submit"
                   className={`${style['update-button']} ${style.button}`}
-                  // onClick={handleSubmit}
+                  onClick={handleCancel}
                 >
                   Cancel
                 </button>
@@ -62,12 +91,20 @@ export default function Profile() {
             </form>
           </>
         ) : (
-          <h1>
-            Welcome back
-            <br />
-            {user.status === 'resolved' &&
-              `${user.info.firstName} ${user.info.lastName}!`}
-          </h1>
+          <>
+            <h1>
+              Welcome back
+              <br />
+              {user.status === 'resolved' &&
+                `${user.info.firstName} ${user.info.lastName}!`}
+            </h1>
+            <button
+              className={`${style['edit-button']} ${style.button}`}
+              onClick={handleClick}
+            >
+              Edit Name
+            </button>
+          </>
         )}
       </div>
       <h2 className="sr-only">Accounts</h2>
