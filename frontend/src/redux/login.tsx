@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { selectLogin } from './selector'
+import utilsFetch from '../utils/utilsFetch'
 
 const initialState = {
   status: 'void',
@@ -56,22 +57,19 @@ const { actions, reducer } = createSlice({
     },
   },
 })
-
-export async function login(dispatch, getState) {
+type functionType = (args?: object) => void
+export async function login(dispatch: functionType, getState: functionType) {
   const state = selectLogin(getState())
   if (state.status === 'pending') {
     return
   }
   dispatch(actions.fetching())
   try {
-    const response = await fetch(`http://localhost:3001/api/v1/user/login/`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ email: state.email, password: state.password }),
-    })
-    const data = await response.json()
+    const data = await utilsFetch(
+      'http://localhost:3001/api/v1/user/login',
+      'POST',
+      { email: state.email, password: state.password }
+    )
     if (data.status >= 400) {
       dispatch(actions.rejected(data.message))
     } else {

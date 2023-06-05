@@ -1,5 +1,5 @@
 import { Outlet, useLocation } from 'react-router-dom'
-import Header from '../Header'
+import Navbar from '../Navbar'
 import Footer from '../Footer'
 import './style.scss'
 
@@ -13,7 +13,7 @@ function Layout(): JSX.Element {
 
   return (
     <>
-      <Header />
+      <Navbar />
       <main className={`${location.pathname !== '/' && 'bg-dark'}`}>
         <Outlet />
       </main>

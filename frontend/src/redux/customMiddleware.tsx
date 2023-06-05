@@ -1,4 +1,4 @@
-const loginMiddleware = (store) => (next) => (action) => {
+const customMiddleware = (store) => (next) => (action) => {
   if (typeof action == 'function') {
     return action(store.dispatch, store.getState)
   } else {
@@ -16,8 +16,12 @@ const loginMiddleware = (store) => (next) => (action) => {
         },
       })
     }
+    if (action.type === 'login/logout') {
+      next({ type: 'profile/logout' })
+      return next({ ...action })
+    }
     return next(action)
   }
 }
 
-export default loginMiddleware
+export default customMiddleware
