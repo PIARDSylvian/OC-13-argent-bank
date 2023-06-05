@@ -58,18 +58,46 @@
   }
 }
 
-.transaction-button {
-  display: block;
-  width: 100%;
+.button {
   padding: 8px;
   font-size: 1.1rem;
   font-weight: bold;
   margin-top: 1rem;
-  border-color: #00bc77;
-  background-color: #00bc77;
-  color: #fff;
+
+  &.update-button {
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+  }
 
   @media screen and (min-width: 720px) {
-    width: 200px;
+    width: 100px;
+  }
+  &.transaction-button {
+    display: block;
+    width: 100%;
+    border-color: #00bc77;
+    background-color: #00bc77;
+    color: #fff;
+
+    @media screen and (min-width: 720px) {
+      width: 200px;
+    }
+  }
+}
+
+.form {
+  input {
+    padding: 5px;
+    font-size: 1.2rem;
+    margin: 0 0.5em;
+
+    @media screen and (max-width: 720px) {
+      display: block;
+      margin: 0 auto;
+
+      &:first-child {
+        margin-bottom: 1em;
+      }
+    }
   }
 }

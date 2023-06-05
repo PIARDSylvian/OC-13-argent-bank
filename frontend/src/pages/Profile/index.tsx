@@ -10,6 +10,7 @@ export default function Profile() {
   const user = useSelector(selectProfile)
   const navigate = useNavigate()
   const dispatch = useDispatch()
+  let edit = true
 
   useEffect(() => {
     if (!token) {
@@ -17,18 +18,57 @@ export default function Profile() {
     } else {
       dispatch(profile(token))
     }
-  }, [navigate, dispatch])
+  }, [navigate, dispatch, token])
 
   return (
     <>
       <div className={style.header}>
-        <h1>
-          Welcome back
-          <br />
-          {user.status === 'resolved' &&
-            `${user.info.firstName} ${user.info.lastName}!`}
-        </h1>
-        <button className={style['edit-button']}>Edit Name</button>
+        {edit ? (
+          <>
+            <h1>Welcome back</h1>
+            <form className={style.form}>
+              <div>
+                <input
+                  type="text"
+                  // id={Object.keys(INITIAL_STATE)[0]}
+                  // onChange={handleChange}
+                  disabled={user.status === 'pending'}
+                  placeholder={user.info.firstName}
+                />
+                <input
+                  type="text"
+                  // id={Object.keys(INITIAL_STATE)[0]}
+                  // onChange={handleChange}
+                  disabled={user.status === 'pending'}
+                  placeholder={user.info.lastName}
+                />
+              </div>
+              <div>
+                <button
+                  type="submit"
+                  className={`${style['update-button']} ${style.button}`}
+                  // onClick={handleSubmit}
+                >
+                  Save
+                </button>
+                <button
+                  type="submit"
+                  className={`${style['update-button']} ${style.button}`}
+                  // onClick={handleSubmit}
+                >
+                  Cancel
+                </button>
+              </div>
+            </form>
+          </>
+        ) : (
+          <h1>
+            Welcome back
+            <br />
+            {user.status === 'resolved' &&
+              `${user.info.firstName} ${user.info.lastName}!`}
+          </h1>
+        )}
       </div>
       <h2 className="sr-only">Accounts</h2>
       <section className={style.account}>
@@ -42,7 +82,7 @@ export default function Profile() {
           </p>
         </div>
         <div className={`${style['account-content-wrapper']} ${style.cta}`}>
-          <button className={style['transaction-button']}>
+          <button className={`${style['transaction-button']} ${style.button}`}>
             View transactions
           </button>
         </div>
@@ -58,7 +98,7 @@ export default function Profile() {
           </p>
         </div>
         <div className={`${style['account-content-wrapper']} ${style.cta}`}>
-          <button className={style['transaction-button']}>
+          <button className={`${style['transaction-button']} ${style.button}`}>
             View transactions
           </button>
         </div>
@@ -72,7 +112,7 @@ export default function Profile() {
           <p className={style['account-amount-description']}>Current Balance</p>
         </div>
         <div className={`${style['account-content-wrapper']} ${style.cta}`}>
-          <button className={style['transaction-button']}>
+          <button className={`${style['transaction-button']} ${style.button}`}>
             View transactions
           </button>
         </div>
