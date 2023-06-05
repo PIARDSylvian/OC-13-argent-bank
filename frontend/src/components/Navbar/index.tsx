@@ -1,11 +1,24 @@
-import { Link } from 'react-router-dom'
 import style from './style.module.scss'
 import logo from '../../assets/argentBankLogo.png'
-import { useSelector } from 'react-redux'
-import { selectLogin } from '../../redux/selector'
+import { Link, useNavigate } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
+import { useEffect } from 'react'
+import { selectToken, selectProfile } from '../../redux/selector'
+import { profile } from '../../redux/profile'
 
-export default function Header() {
-  const user = useSelector(selectLogin)
+export default function Navbar() {
+  const token = useSelector(selectToken)
+  const user = useSelector(selectProfile)
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    if (!token) {
+      navigate('/login')
+    } else {
+      dispatch(profile(token))
+    }
+  }, [navigate, dispatch])
 
   return (
     <nav className={style['main-nav']}>
@@ -22,7 +35,7 @@ export default function Header() {
           <div>
             <Link className={style['main-nav-item']} to="/profile">
               <i className="fa fa-user-circle"></i>
-              Tony
+              {user.info.firstName}
             </Link>
             <Link className={style['main-nav-item']} to="/logout">
               <i className="fa fa-sign-out"></i> Sign Out
