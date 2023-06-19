@@ -10,7 +10,7 @@ schemes:
   - http
   
 paths:
-  /account:
+  /account/{accountId}:
     get:
       security:
         - Bearer: []
@@ -25,10 +25,16 @@ paths:
           description: Attach Bearer JWT token
           required: true
         - name: accountId
-          in: query
+          in: path
           description: accountId of account to return array of transactions objects
           required: true
           type: string
+        - in: body
+          name: date
+          description: date filter 
+          required: false
+          schema:
+            $ref: '#/definitions/Account'
       produces:
         - application/json
       responses:
@@ -40,7 +46,7 @@ paths:
           description: Invalid account id
         500:
           description: Internal Server Error
-  /account/transaction:
+  /account/{accountId}/transaction/{transactionId}:
     get:
       security:
         - Bearer: []
@@ -54,8 +60,12 @@ paths:
           name: Authorization
           description: Attach Bearer JWT token
           required: true
+        - name: accountId
+          in: path
+          required: true
+          type: string
         - name: transactionId
-          in: query
+          in: path
           description: transactionId of transaction to return
           required: true
           type: string
@@ -83,6 +93,15 @@ paths:
           name: Authorization
           description: Attach Bearer JWT token
           required: true
+        - name: accountId
+          in: path
+          required: true
+          type: string
+        - name: transactionId
+          in: path
+          description: transactionId of transaction to return
+          required: true
+          type: string
         - in: body
           name: body
           description: Account Transaction Update Payload
@@ -100,6 +119,40 @@ paths:
           description: Invalid Transaction
         500:
           description: Internal Server Error
+    delete:
+      security:
+        - Bearer: []
+      tags:
+        - Account Module
+      summary: Account transaction delete
+      description: API for Account transaction
+      parameters:
+        - in: header
+          type: string
+          name: Authorization
+          description: Attach Bearer JWT token
+          required: true
+        - name: accountId
+          in: path
+          required: true
+          type: string
+        - name: transactionId
+          in: path
+          description: transactionId of transaction to return
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        200:
+          description: Transaction Successfully
+          schema:
+            $ref: '#/definitions/AccountTransactionDeleteResponse'
+        400:
+          description: Invalid Transaction id
+        500:
+          description: Internal Server Error
+  /account/{accountId}/transaction:
     post:
       security:
         - Bearer: []
@@ -113,6 +166,10 @@ paths:
           name: Authorization
           description: Attach Bearer JWT token
           required: true
+        - name: accountId
+          in: path
+          required: true
+          type: string
         - in: body
           name: body
           description: Account Transaction create Payload
@@ -132,6 +189,11 @@ paths:
           description: Internal Server Error
 
 definitions:
+  Account:
+    properties:
+      date:
+        type: string
+        pattern: YYYY-MM
   AccountResponse:
     type: object
     properties:
@@ -194,8 +256,6 @@ definitions:
             type: string
   AccountTransactionUpdate:
     properties:
-      id:
-        type: string
       category:
         type: number
       note:
@@ -246,6 +306,13 @@ definitions:
         properties:
           id:
             type: string
+  AccountTransactionDeleteResponse:
+    type: object
+    properties:
+      status:
+        type: integer
+      message:
+        type: string
   
 securityDefinitions:
   Bearer:
