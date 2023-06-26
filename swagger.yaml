@@ -107,7 +107,7 @@ paths:
           description: Account Transaction Update Payload
           required: true
           schema:
-            $ref: '#/definitions/AccountTransactionUpdate'
+            $ref: '#/definitions/AccountTransactionResponse'
       produces:
         - application/json
       responses:
@@ -175,7 +175,7 @@ paths:
           description: Account Transaction create Payload
           required: true
           schema:
-            $ref: '#/definitions/AccountTransactionCreate'
+            $ref: '#/definitions/AccountTransactionResponse'
       produces:
         - application/json
       responses:
@@ -254,12 +254,6 @@ definitions:
             type: number
           note:
             type: string
-  AccountTransactionUpdate:
-    properties:
-      category:
-        type: number
-      note:
-        type: string
   AccountTransactionUpdateResponse:
     type: object
     properties:
@@ -267,33 +261,6 @@ definitions:
         type: integer
       message:
         type: string
-  AccountTransactionCreate:
-    type: object
-    properties:
-      status:
-        type: integer
-      message:
-        type: string
-      body:
-        type: object
-        properties:
-          date:
-            type: string
-            format: date
-          description:
-            type: string
-          amount:
-            type: number
-            format: float
-          balance:
-            type: number
-            format: float
-          transaction:
-            type: string
-          category:
-            type: number
-          note:
-            type: string
   AccountTransactionCreateResponse:
     type: object
     properties:
