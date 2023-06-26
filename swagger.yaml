@@ -265,30 +265,23 @@ definitions:
   AccountTransactionCreate:
     type: object
     properties:
-      status:
-        type: integer
-      message:
+      date:
         type: string
-      body:
-        type: object
-        properties:
-          date:
-            type: string
-            format: date
-          description:
-            type: string
-          amount:
-            type: number
-            format: float
-          balance:
-            type: number
-            format: float
-          transaction:
-            type: string
-          category:
-            type: number
-          note:
-            type: string
+        format: date
+      description:
+        type: string
+      amount:
+        type: number
+        format: float
+      balance:
+        type: number
+        format: float
+      transaction:
+        type: string
+      category:
+        type: number
+      note:
+        type: string
   AccountTransactionDeleteResponse:
     type: object
     properties:
