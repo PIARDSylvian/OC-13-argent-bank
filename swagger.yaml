@@ -107,14 +107,14 @@ paths:
           description: Account Transaction Update Payload
           required: true
           schema:
-            $ref: '#/definitions/AccountTransactionResponse'
+            $ref: '#/definitions/AccountTransactionUpdate'
       produces:
         - application/json
       responses:
         200:
           description: Transaction Successfully
           schema:
-            $ref: '#/definitions/AccountTransactionUpdateResponse'
+            $ref: '#/definitions/AccountTransactionResponse'
         400:
           description: Invalid Transaction
         500:
@@ -175,14 +175,14 @@ paths:
           description: Account Transaction create Payload
           required: true
           schema:
-            $ref: '#/definitions/AccountTransactionResponse'
+            $ref: '#/definitions/AccountTransactionCreate'
       produces:
         - application/json
       responses:
         200:
           description: Account Successfully
           schema:
-            $ref: '#/definitions/AccountTransactionCreateResponse'
+            $ref: '#/definitions/AccountTransactionResponse'
         400:
           description: Invalid Transaction
         500:
@@ -254,14 +254,15 @@ definitions:
             type: number
           note:
             type: string
-  AccountTransactionUpdateResponse:
-    type: object
+  AccountTransactionUpdate:
     properties:
-      status:
-        type: integer
-      message:
+      id:
         type: string
-  AccountTransactionCreateResponse:
+      category:
+        type: number
+      note:
+        type: string
+  AccountTransactionCreate:
     type: object
     properties:
       status:
@@ -271,7 +272,22 @@ definitions:
       body:
         type: object
         properties:
-          id:
+          date:
+            type: string
+            format: date
+          description:
+            type: string
+          amount:
+            type: number
+            format: float
+          balance:
+            type: number
+            format: float
+          transaction:
+            type: string
+          category:
+            type: number
+          note:
             type: string
   AccountTransactionDeleteResponse:
     type: object
