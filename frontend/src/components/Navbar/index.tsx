@@ -3,11 +3,11 @@ import logo from '../../assets/argentBankLogo.png'
 import { Link, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect } from 'react'
-import { selectToken, selectProfile } from '../../redux/selector'
+import { selectProfile } from '../../redux/selector'
 import { profile } from '../../redux/profile'
 
 export default function Navbar() {
-  const token = useSelector(selectToken)
+  const token = sessionStorage.getItem('token')
   const user = useSelector(selectProfile)
   const navigate = useNavigate()
   const dispatch = useDispatch()

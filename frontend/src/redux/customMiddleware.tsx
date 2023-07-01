@@ -3,10 +3,7 @@ const customMiddleware = (store) => (next) => (action) => {
     return action(store.dispatch, store.getState)
   } else {
     if (action.type === 'login/resolved') {
-      next({
-        type: 'token/setToken',
-        payload: { token: action.payload.body.token },
-      })
+      sessionStorage.setItem('token', action.payload.body.token) // add session storage
 
       return next({
         ...action,
@@ -17,6 +14,7 @@ const customMiddleware = (store) => (next) => (action) => {
       })
     }
     if (action.type === 'login/logout') {
+      sessionStorage.clear() // remove session storage
       next({ type: 'profile/logout' })
       return next({ ...action })
     }

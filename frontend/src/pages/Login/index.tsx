@@ -19,16 +19,17 @@ type stateType = {
 }
 
 export default function Login() {
+  const token = sessionStorage.getItem('token')
   const user = useSelector(selectLogin)
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
   useEffect(() => {
-    if (user.status === 'resolved') {
+    if (token) {
       navigate('/profile')
     }
     document.title = 'Login - ArgentBank'
-  }, [navigate, user])
+  }, [navigate, token])
 
   const handleChange = (e: FormEvent) => {
     const target = e.target as HTMLInputElement

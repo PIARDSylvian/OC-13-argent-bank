@@ -1,7 +1,7 @@
 import style from './style.module.scss'
 import { useEffect, FormEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { selectToken, selectProfile } from '../../redux/selector'
+import { selectProfile } from '../../redux/selector'
 import { useSelector, useDispatch } from 'react-redux'
 import {
   profile,
@@ -12,7 +12,7 @@ import {
 } from '../../redux/profile'
 
 export default function Profile() {
-  const token = useSelector(selectToken)
+  const token = sessionStorage.getItem('token')
   const user = useSelector(selectProfile)
   const navigate = useNavigate()
   const dispatch = useDispatch()

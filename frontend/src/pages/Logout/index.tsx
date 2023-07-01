@@ -5,15 +5,16 @@ import { selectLogin } from '../../redux/selector'
 import { logout } from '../../redux/login'
 
 export default function Logout() {
+  const token = sessionStorage.getItem('token')
   const user = useSelector(selectLogin)
   const dispatch = useDispatch()
 
   useEffect(() => {
-    if (user.status === 'resolved') {
+    if (token) {
       dispatch(logout())
     }
     document.title = 'Logout - ArgentBank'
-  }, [dispatch, user])
+  }, [dispatch, token])
 
   return (
     <section className={style['sign-out-content']}>
