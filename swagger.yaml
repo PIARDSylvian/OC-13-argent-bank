@@ -38,6 +38,10 @@ paths:
             $ref: '#/definitions/AccountResponse'
         400:
           description: Invalid account id
+        401: 
+          description: Invalid token
+        403:
+          description: Forbidden access
         500:
           description: Internal Server Error
   /account/{accountId}/transaction/{transactionId}:
@@ -72,6 +76,10 @@ paths:
             $ref: '#/definitions/AccountTransactionResponse'
         400:
           description: Invalid Transaction id
+        401: 
+          description: Invalid token
+        403:
+          description: Forbidden access
         500:
           description: Internal Server Error
     put:
@@ -111,6 +119,10 @@ paths:
             $ref: '#/definitions/AccountTransactionResponse'
         400:
           description: Invalid Transaction
+        401: 
+          description: Invalid token
+        403:
+          description: Forbidden access
         500:
           description: Internal Server Error
   /account/{accountId}/transaction:
@@ -146,6 +158,10 @@ paths:
             $ref: '#/definitions/AccountTransactionResponse'
         400:
           description: Invalid Transaction
+        401: 
+          description: Invalid token
+        403:
+          description: Forbidden access
         500:
           description: Internal Server Error
 
